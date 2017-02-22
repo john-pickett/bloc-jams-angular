@@ -1,9 +1,9 @@
 (function (){
-    function AlbumCtrl() {
-        this.albumData = []
+    function AlbumCtrl(Fixtures) {
+        this.albumData = Fixtures.getAlbum;
         this.albumData.push(albumPicasso);
     }
     angular
         .module('blocJams')
-        .controller('AlbumCtrl', AlbumCtrl);
+        .controller('AlbumCtrl', ['Fixtures', AlbumCtrl]);
 })();
