@@ -21,7 +21,7 @@
              formats: ['mp3'],
              preload: true
          });
-         
+
          currentSong = song;
      }
         
