@@ -118,7 +118,25 @@
             }
         }
         
+        /**
+         * @function SongPlayer.next
+         * @desc Gets index of current song, increments it
+         * @param {Object} song
+        */
         
+        SongPlayer.next = function() {
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex++;
+            
+            if (currentSongIndex === currentAlbum.songs.length) {
+                currentBuzzObject.stop();
+                SongPlayer.currentSong.playing = null;
+            } else {
+                var song = currentAlbum.songs[currentSongIndex];
+                setSong(song);
+                playSong(song);
+            }
+        };
     
         // only return SongPlayer below this line
          return SongPlayer;
