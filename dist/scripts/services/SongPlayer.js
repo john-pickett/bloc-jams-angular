@@ -54,6 +54,11 @@
             return currentAlbum.songs.indexOf(song);
         };
         
+        var stopSong = function(song) {
+            currentBuzzObject.stop();
+            SongPlayer.currentSong.playing = null;
+        };
+        
     // ////// Public Methods //////
         
         SongPlayer.currentSong = null;
@@ -69,17 +74,12 @@
              if (SongPlayer.currentSong !== song) {
                 setSong(song);
                 playSong(song);
-                console.log("Is a song playing? A song should be playing!");
-
              } else if (SongPlayer.currentSong === song) {
-                console.log("song should play");
                 if (currentBuzzObject.isPaused()) {
                      currentBuzzObject.play();
                  }
-
              } else {
-                console.log("unused else. can delete");
-
+                console.log("unused else, can delete");
              } // end of last else 
 
          }; // end of .play method
@@ -92,10 +92,8 @@
         
         SongPlayer.pause = function(song) {
             song = song || SongPlayer.currentSong;
-            console.log("Song is now paused.");
             currentBuzzObject.pause();
             song.playing = false;
-
         };
         
         /**
@@ -109,8 +107,7 @@
             currentSongIndex--;
             
             if (currentSongIndex < 0) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+                stopSong(song);
             } else {
                 var song = currentAlbum.songs[currentSongIndex];
                 setSong(song);
@@ -129,8 +126,7 @@
             currentSongIndex++;
             
             if (currentSongIndex === currentAlbum.songs.length) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+                stopSong(song);
             } else {
                 var song = currentAlbum.songs[currentSongIndex];
                 setSong(song);
