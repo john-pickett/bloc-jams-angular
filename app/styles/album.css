@@ -1,4 +1,7 @@
- .album-cover-art {
+.album-view {
+    margin-bottom: 250px;
+} 
+.album-cover-art {
      position: relative;
      left: 20%;
      margin-top: 1rem;
