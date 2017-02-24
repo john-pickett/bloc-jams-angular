@@ -20,15 +20,21 @@
          * @param {Object} song
         */
         var setSong = function(song) {
-             if (currentBuzzObject) {
+            if (currentBuzzObject) {
                  currentBuzzObject.stop();
                  SongPlayer.currentSong.playing = null;
              }
 
-             currentBuzzObject = new buzz.sound(song.audioUrl, {
+            currentBuzzObject = new buzz.sound(song.audioUrl, {
                  formats: ['mp3'],
                  preload: true
              });
+            
+            currentBuzzObject.bind('timeupdate', function() {
+                $rootScope.$apply(function(){
+                    SongPlayer.currentTime = currentBuzzObject.getTime();
+                });
+            });
 
              SongPlayer.currentSong = song;
          }
@@ -62,6 +68,12 @@
     // ////// Public Methods //////
         
         SongPlayer.currentSong = null;
+        
+        /**
+        * @desc Current playback time (in seconds) of currently playing song
+        * @type {Number}
+        */
+        SongPlayer.currentTime = null;
 
         /**
          * @function SongPlayer.play()
@@ -69,7 +81,7 @@
          * @param {Object} song
         */
         
-         SongPlayer.play = function(song) {
+        SongPlayer.play = function(song) {
              song = song || SongPlayer.currentSong;
              if (SongPlayer.currentSong !== song) {
                 setSong(song);
@@ -131,6 +143,18 @@
                 var song = currentAlbum.songs[currentSongIndex];
                 setSong(song);
                 playSong(song);
+            }
+        };
+        
+        /**
+         * @function setCurrentTime
+         * @desc Set current time (in seconds) of currently playing song
+         * @param {Number} time
+         */
+        
+        SongPlayer.setCurrentTime = function (time) {
+            if (currentBuzzObject) {
+                currentBuzzObject.setTime(time);
             }
         };
     
