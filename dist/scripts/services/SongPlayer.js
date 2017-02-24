@@ -48,6 +48,7 @@
         var playSong = function(song) {
             currentBuzzObject.play();
             song.playing = true;
+//            SongPlayer.volume = currentBuzzObject.getVolume();
         }
         
         /**
@@ -74,6 +75,10 @@
         * @type {Number}
         */
         SongPlayer.currentTime = null;
+        
+        // Volume attribute
+        
+        SongPlayer.volume = 80;
 
         /**
          * @function SongPlayer.play()
@@ -90,9 +95,7 @@
                 if (currentBuzzObject.isPaused()) {
                      currentBuzzObject.play();
                  }
-             } else {
-                console.log("unused else, can delete");
-             } // end of last else 
+             }
 
          }; // end of .play method
         
@@ -157,6 +160,20 @@
                 currentBuzzObject.setTime(time);
             }
         };
+        
+        /**
+         * @function setVolume
+         * @desc Set volume of currently playing song
+         * @param {Number} volume
+         */
+        
+        SongPlayer.setVolume = function(volume) {
+            if (currentBuzzObject) {
+                currentBuzzObject.setVolume(volume);
+            }
+            SongPlayer.volume = volume;
+        };
+        
     
         // only return SongPlayer below this line
          return SongPlayer;
