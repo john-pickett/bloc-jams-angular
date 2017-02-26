@@ -155,7 +155,7 @@
          * @param {Number} time
          */
         
-        SongPlayer.setCurrentTime = function (time) {
+        SongPlayer.setCurrentTime = function(time) {
             if (currentBuzzObject) {
                 currentBuzzObject.setTime(time);
             }
