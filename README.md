@@ -1,4 +1,4 @@
-### Bloc Jams Angular
+# Bloc Jams Angular
 
 ## Summary
 Everyone likes to have access to their favorite music, and Bloc Jams is a great way to take your music library with you.
